@@ -1,20 +1,36 @@
+import { useEffect, useState } from 'react';
+
+import { api } from '../../services/api';
+import { IProductsProps } from '../../shared/productsProps.interface';
+
 import { BsCartPlus } from "react-icons/bs";
 
 export function Home() {
-    const items = [1, 2, 3, 4, 5, 6]
+    const [products, setProducts] = useState<IProductsProps[]>([])
+
+    useEffect(() => {
+        async function getProducts() {
+            const response = await api.get("/products")
+            setProducts(response.data);
+        }
+        getProducts();
+    }, [])
     
     return (
         <div>
-            <main className="w-full max-w-7xl px-4 mx-auto">
+            <main className="w-full max-w-7xl px-4 mx-auto mb-10">
                 <h1 className="font-bold text-2xl mb-4 mt-10 text-center">Produtos em alta</h1>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
-                    {items.map((item) => (
-                        <section className="w-full" key={item}>
-                            <img className="w-full rounded-lg max-h-70 mb-2" src="https://m.media-amazon.com/images/I/51jf-jmkW5L._AC_UF894,1000_QL80_.jpg" alt="placeholder alt" />
-                            <p className="font-medium mt-2 mb-2">Echo Dot 5"</p>
+                    {products.map((product) => (
+                        <section className="w-full" key={product.id}>
+                            <img className="w-full rounded-lg max-h-70 mb-2" src={product.cover} alt={`Imagem de um ${product.title}`} />
+                            <p className="font-medium mt-2 mb-2">{product.title}</p>
                             <div className="flex gap-3 items-center">
-                                <strong className="text-zinc-700/90">R$ 599,00</strong>
+                                <strong className="text-zinc-700/90">{product.price.toLocaleString("pt-Br", {
+                                    style: "currency",
+                                    currency: "BRL"
+                                })}</strong>
                                 <button className="bg-zinc-900 p-1 rounded">
                                     <BsCartPlus size={20} color="#FFF" />
                                 </button>
