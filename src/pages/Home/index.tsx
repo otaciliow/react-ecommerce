@@ -27,7 +27,7 @@ export function Home() {
                             <img className="w-full rounded-lg max-h-70 mb-2" src={product.cover} alt={`Imagem de um ${product.title}`} />
                             <p className="font-medium mt-2 mb-2">{product.title}</p>
                             <div className="flex gap-3 items-center">
-                                <strong className="text-zinc-700/90">{product.price.toLocaleString("pt-Br", {
+                                <strong className="text-zinc-700/90">{product.price.toLocaleString("pt-BR", {
                                     style: "currency",
                                     currency: "BRL"
                                 })}</strong>
