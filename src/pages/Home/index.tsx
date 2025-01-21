@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../../services/api';
-import { IProductsProps } from '../../shared/productsProps.interface';
+import { IProductsProps } from '../../interfaces/productsProps.interface';
 
 import { BsCartPlus } from "react-icons/bs";
 
