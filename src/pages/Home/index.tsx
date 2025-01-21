@@ -6,6 +6,7 @@ import { IProductsProps } from '../../interfaces/productsProps.interface';
 import { CartContext } from '../../contexts/CartContext';
 
 import { BsCartPlus } from "react-icons/bs";
+import toast from 'react-hot-toast';
 
 export function Home() {
     const [products, setProducts] = useState<IProductsProps[]>([])
@@ -20,6 +21,12 @@ export function Home() {
     }, []);
 
     function handleAddItemCart(product: IProductsProps) {
+        toast.success("Adicionado ao carrinho!", {
+            style: {
+                backgroundColor: "#121212",
+                color: "#fff"
+            }
+        });
         addItemCart(product);
     }
     
