@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { CartContext } from '../../contexts/CartContext';
 
+import { BsTrash } from 'react-icons/bs';
+
 export function Cart() {
 
     const { cart, total, addItemCart, removeItemCart } = useContext(CartContext);
@@ -28,7 +30,13 @@ export function Cart() {
                         currency: "BRL"
                     })}</strong>
                     <div className="flex items-center justify-center gap-3">
-                        <button className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2" onClick={() => removeItemCart(item)}>-</button>
+                        { item.amount === 1 ? (
+                            <button className="bg-slate-600 rounded font-medium flex items-center justify-center p-1" onClick={() => removeItemCart(item)}>
+                                <BsTrash size={18} color="#fff" />
+                            </button>
+                        ) : (
+                            <button className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2" onClick={() => removeItemCart(item)}>-</button>
+                        )}
                         <span>{item.amount}</span>
                         <button className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2" onClick={() => addItemCart(item)}>+</button>
                     </div>
